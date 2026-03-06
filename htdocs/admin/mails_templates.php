@@ -1203,7 +1203,7 @@ if ($num) {
 				}
 				print '<td colspan="'.($colspan - 1).'" class="" style="padding-left: 20px; padding-right: 20px;">';
 
-				$fieldsforcontent = array('topic', 'email_from','joinfiles', 'content');
+				$fieldsforcontent = array('topic', 'email_from','joinfiles', 'joinedfiles', 'content');
 				if (getDolGlobalString('MAIN_EMAIL_TEMPLATES_FOR_OBJECT_LINES')) {
 					$fieldsforcontent[] = 'content_lines';
 				}
@@ -1235,6 +1235,15 @@ if ($num) {
 						if ($tmpfieldlist == 'joinfiles') {
 							print '<div class="minwidth150 inline-block">'.$form->textwithpicto($langs->trans("FilesAttachedToEmail"), $tabhelp[25][$tmpfieldlist], 1, 'help', '', 0, 2, $tmpfieldlist).'</div> ';
 							print $form->selectyesno($tmpfieldlist.'-'.$rowid, (isset($obj->$tmpfieldlist) ? $obj->$tmpfieldlist : '0'), 1, ($action != 'edit'), 0, 1);
+							print '<br>'."\n";
+						}
+						if ($tmpfieldlist == 'joinedfiles') {
+							print '<div class="minwidth150 inline-block">'.$form->textwithpicto($langs->trans("LinkedFiles"), $tabhelp[25][$tmpfieldlist], 1, 'help', '', 0, 2, $tmpfieldlist).'</div> ';
+							print '<div class="maxwidth250">
+								<input type="file" class="flat" id="addedfile" name="addedfile" value="Envoyer fichier">
+								<input type="submit" class="button smallpaddingimp reposition" id="addfile" name="addfile" value="Joindre ce fichier">
+								</div>
+							';
 							print '<br>'."\n";
 						}
 

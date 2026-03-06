@@ -688,6 +688,7 @@ if (empty($reshook)) {
 		$action = 'view';
 	}
 
+
 	// Actions when printing a doc from card
 	include DOL_DOCUMENT_ROOT.'/core/actions_printing.inc.php';
 

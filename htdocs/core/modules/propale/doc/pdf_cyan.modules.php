@@ -2058,6 +2058,22 @@ class pdf_cyan extends ModelePDFPropales
 			// Can be retrieve with getSignatureAppearanceArray()
 			// Can be also detected by putting the mouse over the area when using evince pdf reader
 			$pdf->addEmptySignatureAppearance($posx, $tab_top + $tab_hl + 3, $largcol, $tab_hl * 3);
+
+			if (getDolGlobalString('MAIN_PDF_PROPAL_SHOW_SIGN_URL_QRCODE')) {
+				require_once TCPDF_PATH . 'tcpdf_barcodes_2d.php';
+
+				$url = getOnlineSignatureUrl(0, $object->element, $object->ref, 1, $object);
+
+				$barcode = new TCPDF2DBarcode($url, 'QRCODE,L');
+				$img = $barcode->getBarcodePngData();
+
+				$imgSize = 18;
+				$imgposY = $tab_top + $tab_hl + $tab_hl * 3 + 5;
+				$imgPosX = $posx + $largcol - $imgSize;
+
+				$pdf->Image('@' . $img, $imgPosX, $imgposY, $imgSize, $imgSize, 'PNG', '', 'C');
+			}
+
 		}
 
 		return ($tab_hl * 7);
